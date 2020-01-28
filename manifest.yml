@@ -7,3 +7,5 @@ include_files:
 - bin/release
 - manifest.yml
 - app.js
+- package.json
+- package-lock.json
