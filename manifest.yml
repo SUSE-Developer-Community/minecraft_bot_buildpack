@@ -1,0 +1,9 @@
+---
+include_files:
+- VERSION
+- bin/detect
+- bin/supply
+- bin/finalize
+- bin/release
+- manifest.yml
+- app.js

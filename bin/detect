@@ -1,0 +1,20 @@
+#!/bin/bash
+
+###
+# Detect is where the custom buildpack determines if it will run. 
+# 
+# I'm checking if the files packages.json and function.js exist. If so, I'll act on the 
+#
+# Adopted from https://github.com/SUSE/cf-staticfile-buildpack/blob/master/bin/detect
+# 
+###
+
+
+
+BP=$(dirname $(dirname $0))
+
+if [ -f $1/bot.js ]; then
+    echo "minecraft_bot `cat $BP/VERSION`" && exit 0
+else
+  echo "no" && exit 1
+fi

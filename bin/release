@@ -1,0 +1,4 @@
+#!/bin/bash
+
+echo "default_process_types:"
+echo "  web: /home/vcap/deps/0/node/bin/node app.js" 

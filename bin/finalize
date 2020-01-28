@@ -1,0 +1,27 @@
+#!/bin/bash
+
+###
+# Finalize gets run if it's the last buildpack able to run on the code.
+# 
+# It's responsible for creating the directory structure that get's built into the droplet then container.
+# 
+###
+
+export BUILDPACK_DIR=`dirname $(readlink -f ${BASH_SOURCE%/*})`
+BUILD_DIR=$1
+CACHE_DIR=$2
+DEPS_DIR=$3/$4
+
+echo "Running Supply Script of minecraft bot buildpack"
+
+# Move needed files to the working directory
+cp $BUILDPACK_DIR/app.js .
+cp $BUILD_DIR/bot.js .
+cp $BUILDPACK_DIR/package.json .
+cp $BUILDPACK_DIR/package-lock.json .
+
+# Add node bin as PATH for running npm below.
+export PATH=$DEPS_DIR/node/bin:$PATH
+
+# Install npm dependencies specified
+npm install 
