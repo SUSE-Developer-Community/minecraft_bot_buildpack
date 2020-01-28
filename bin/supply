@@ -12,16 +12,18 @@
 ###
 echo "Running Supply Script of custom buildpack"
 
+export NODE_VERSION="12.5.0-linux-x64"
+
 export BUILDPACK_DIR=`dirname $(readlink -f ${BASH_SOURCE%/*})`
 BUILD_DIR=$1
 CACHE_DIR=$2
 DEPS_DIR=$3/$4
 
 if [ ! -f $CACHE_DIR/node.tgz ]; then
-  curl https://nodejs.org/download/release/v12.5.0/node-v12.5.0-linux-x64.tar.gz > $CACHE_DIR/node.tgz
+  curl https://nodejs.org/download/release/v12.5.0/node-v$NODE_VERSION.tar.gz > $CACHE_DIR/node.tgz
   tar -xzf $CACHE_DIR/node.tgz -C $CACHE_DIR/
 fi
 
-cp -r $CACHE_DIR/node-v12.5.0-linux-x64 $DEPS_DIR/node
+cp -r $CACHE_DIR/node-v$NODE_VERSION $DEPS_DIR/node
 
 exit 0
