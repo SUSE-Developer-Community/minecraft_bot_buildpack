@@ -37,9 +37,10 @@ bot.on('error', err => console.log(err))
 bot.on('respawn',()=>{console.log('respawn')})
 
 const func = require('./bot.js')
+const wrapper = require('./wrapper.js')(bot)
 setInterval(()=>{
   func({
     bot,
     getPlayers: bot.findPlayers
-  }, {}, {})
+  }, wrapper, {}) // wrapper
 },1000)
