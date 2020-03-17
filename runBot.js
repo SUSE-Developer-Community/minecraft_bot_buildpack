@@ -20,6 +20,7 @@ if (process.argv.length < 3 || process.argv.length > 4) {
 const script = process.argv[2];
 username = script;
 username += `_${uuid}`;
+username = username.substr(0,16); // trim to 16 characters, minecraft limit
 
 var bot = mineflayer.createBot({
   username,
@@ -49,9 +50,9 @@ setInterval(()=>{
 },1000)
 
 // Announce Team to Lewis Bot
-bot.on('login', function(){
-  console.log(bot.username + "| func: " + func)
+bot.once('login', function(){
+  console.log(bot.username + "| playerBot: " + playerBot)
   console.log(bot.username + "| Login")
   console.log(bot.username + `| ${wrapper.TEAM_PREFIX}${playerBot.team}${wrapper.TEAM_SUFFIX}`)
-  bot.chat(`${wrapper.TEAM_PREFIX}${func.team}${wrapper.TEAM_SUFFIX}`)
+  bot.chat(`${wrapper.TEAM_PREFIX}${playerBot.team}${wrapper.TEAM_SUFFIX}`)
 })
