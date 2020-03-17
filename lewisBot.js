@@ -47,35 +47,38 @@ console.log(`Initializing ${username}`)
 //     bot.chat("stopping");
 // });
 bot.on('chat', function(chatuser, message) {
-    // navigate to whoever talks
-    console.log('Lewis|Speaker: ' + chatuser + ', bot username:' + bot.username + '\nmsg: ' + message)
+    // console.log('Lewis|Speaker: ' + chatuser + ', bot username:' + bot.username + '\nmsg: ' + message)
+    // Ignore messages from this bot
     if (chatuser === bot.username) return;
 
-    console.log('Lewis|Checking if chat contains ' + wrapper.TEAM_PREFIX)
-    if (message.includes(wrapper.TEAM_PREFIX)) {
+    console.log('Lewis|Checking if chat contains ' + wrapper.TEAM_PREFIX + '___' + wrapper.TEAM_SUFFIX)
+
+    function addSpeakerToTeam() {
         // parse chat for team
         console.log('Lewis|Parse for team')
         var end = message.length - wrapper.TEAM_SUFFIX.length;
         var teamName = message.substring(wrapper.TEAM_PREFIX.length, end);
         console.log(`Found [${teamName}]`)
-        
+
         // test for team? - No easy way to test without waiting for chat response
-        
+
         // make team
         console.log('Lewis|Make team')
         bot.chat(`/scoreboard teams add ${teamName}`)
-        
+
         // set random color?
         console.log('Lewis|Random Color team?')
-        var colorIndex = Math.floor(Math.random() * wrapper.colors.length -1);
+        var colorIndex = Math.floor(Math.random() * wrapper.colors.length - 1);
         var color = colorIndex < wrapper.colors.length ? wrapper.colors[colorIndex] : wrapper.colors[0]
         bot.chat(`/scoreboard teams option ${teamName} color ${color}`)
-        
+
         // join player to team
         console.log('Lewis|Join team')
         bot.chat(`/scoreboard teams join ${teamName} ${chatuser}`)
-    } else if (message === 'stop') {
-        bot.navigate.stop();
+    }
+
+    if (message.includes(wrapper.TEAM_PREFIX)) {
+        addSpeakerToTeam();
     }
 });
         
