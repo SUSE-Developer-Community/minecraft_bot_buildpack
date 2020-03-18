@@ -9,6 +9,8 @@ const port = 25565;
 const username = "Geeko"
 const spawn = [27,64,-110]
 const chatInterval = 15000;
+
+var phraseIndex =0
 const phrases = ["Good luck!",
     "Thanks for saving my forest!",
     "Say hi to Lewis for me if you see him.",
@@ -37,11 +39,10 @@ bot.on('login',() => {
 
 // at set interval, chat random Geeko phrase
 setInterval(()=>{
-    var phraseIndex = Math.floor(Math.random() * phrases.length)
-    bot.chat(phrases[phraseIndex])
+    // uncomment for random phrases
+    // phraseIndex = Math.floor(Math.random() * phrases.length)
+    bot.chat(phrases[phraseIndex++%phrases.length])
 },chatInterval)
-
-//     bot.chat("found path. I can get there in " + path.length + " moves.");
 
 
         
