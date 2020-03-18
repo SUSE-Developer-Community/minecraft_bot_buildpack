@@ -9,6 +9,19 @@ const host = 'localhost';
 const port = 25565;
 const username = "Lewis_Pugh"
 const spawn = [-384,64,-384]
+const chatInterval = 33300;
+
+var phraseIndex = 0
+const phrases = ["Just keep swimming!  Just keep swimming!",
+    "Thanks for helping save the planet!",
+    "Say 'hi' to Geeko for me if you see him.",
+    "You're a lean, green, planting machine!",
+    "It's like this ocean goes on forever...",
+    "Water water everywhere, but not a drop to drink.",
+    "Row row row your... self gently down the..."]
+
+var waypointIndex = 0;
+const waypoints = [[-384,512],[512,512],[512,-384],[-384,-384]]
 var teamName = null;
 
 var bot = mineflayer.createBot({
@@ -24,7 +37,12 @@ bot.on('respawn',()=>{console.log('respawn')})
 // Sample usage
 console.log(`${username}| Initializing`)
 
-// optional configuration
+// at set interval, chat random Geeko phrase
+setInterval(()=>{
+    // uncomment for random phrases
+    // phraseIndex = Math.floor(Math.random() * phrases.length)
+    bot.chat(phrases[phraseIndex++%phrases.length])
+},chatInterval)
 
 // TODO: Teleport to water and start swimming
 // Teleport to Geeko hideout
@@ -32,10 +50,8 @@ bot.on('login',() => {
     console.log(`${username}| Login: Teleporting to ocean`)
     bot.chat(`/tp ${spawn[0]} ${spawn[1]} ${spawn[2]}`)
 })
-// bot.navigate.blocksToAvoid[132] = true; // avoid tripwire
-// bot.navigate.blocksToAvoid[59] = false; // ok to trample crops
 // bot.navigate.on('pathFound', function (path) {
-//     bot.chat("found path. I can get there in " + path.length + " moves.");
+//     bot.chat(`found path to ${waypoints[waypointIndex]}. I can get there in ${path.length} moves.`);
 // });
 // bot.navigate.on('cannotFind', function (closestPath) {
 //     bot.chat("unable to find path. getting as close as possible");
@@ -90,18 +106,9 @@ bot.on('chat', function(chatuser, message) {
     if (message.includes(wrapper.TEAM_PREFIX)) {
         addSpeakerToTeam(chatuser, message);
         giveBlocks(chatuser);
-    }
-});
-
-bot.on('chat', function(chatuser, message) {
-    // console.log('Lewis|Speaker: ' + chatuser + ', bot username:' + bot.username + '\nmsg: ' + message)
-    // Ignore messages from this bot
-    if (chatuser === bot.username) return;
-
-    console.log('Lewis|Checking if chat contains ' + wrapper.TEAM_PREFIX + '___' + wrapper.TEAM_SUFFIX)
-
-    if (message === wrapper.RESUPPLY_MSG) {
+    } else if (message === wrapper.RESUPPLY_MSG) {
         giveBlocks(chatuser);
     }
 });
+
         
