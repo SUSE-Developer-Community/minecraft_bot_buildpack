@@ -23,7 +23,7 @@ const phrases = ["Just keep swimming!  Just keep swimming!",
     "Row, row, row, your... self gently down the..."]
 
 let waypointIndex = 0;
-// const waypoints = [[-384,512],[512,512],[512,-384],[-384,-384]]
+const waypointInterval = 30*000;
 const waypoints = [new Vec3(-384, 64, 512), new Vec3(512, 64, 512), new Vec3(512, 64, -384), new Vec3(-384, 64, -384)]
 let teamName = null;
 
@@ -64,7 +64,7 @@ bot.on('login', () => {
         let waypoint = waypoints[waypointIndex++ % waypoints.length]
         bot.chat(`/tp ${waypoint.x} ${waypoint.y} ${waypoint.z}`)
         // bot.navigate.to(target.position);
-    }, 5000)
+    }, waypointInterval)
 })
 // bot.navigate.on('pathFound', function (path) {
 //     bot.chat(`found path to ${waypoints[2]}. I can get there in ${path.length} moves.`);
