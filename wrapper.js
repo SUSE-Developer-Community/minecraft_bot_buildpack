@@ -8,21 +8,5 @@ module.exports = (bot) => ({
     },
     findNearestSapling: () => {
         //TODO, find nearest Grass using bot
-    },
-    findNearestBlock: (id) => {
-        return bot.findBlock({
-            point: bot.entity.position,
-            matching: (block) => {
-                if (block && (block.type == id)) {
-                    const blockAbove = bot.blockAt(block.position.offset(0, 1, 0))
-                    return !blockAbove || blockAbove.type === 0 //empty space above
-                }
-                return false
-            },
-            maxDistance: 3
-        })
-    },
-    distance: (v1, v2) => {
-        return Math.abs(v1.x - v2.x) + Math.abs(v1.y - v2.y) + Math.abs(v1.z - v2.z)
     }
 })
