@@ -34,6 +34,7 @@ console.log(`${username}|Initializing`)
 // Teleport to Geeko hideout
 bot.on('login',() => {
     console.log(`${username}| Login: Teleporting to geeko spawn`)
+    bot.chat(`/gamemode 1`)
     bot.chat(`/tp ${spawn[0]} ${spawn[1]} ${spawn[2]}`)
 })
 
@@ -73,6 +74,7 @@ function giveBlocks(chatuser) {
     bot.chat(`/give @p[name=${chatuser}] sapling 64 3 {CanPlaceOn:[grass]}`)
     bot.chat(`/give @p[name=${chatuser}] dye 64 15 {CanPlaceOn:["sapling"]}`)
     bot.chat(`/give @p[name=${chatuser}] torch 64 0 {CanPlaceOn:["log",grass,dirt,sand,sandstone]}`)
+    bot.chat(`/gamemode 1 @p[name=${chatuser}]`) // set player to Survival mode
 }
 
 
