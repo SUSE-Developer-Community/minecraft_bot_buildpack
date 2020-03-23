@@ -74,7 +74,7 @@ function giveBlocks(chatuser) {
     bot.chat(`/give @p[name=${chatuser}] sapling 64 3 {CanPlaceOn:[grass]}`)
     bot.chat(`/give @p[name=${chatuser}] dye 64 15 {CanPlaceOn:["sapling"]}`)
     bot.chat(`/give @p[name=${chatuser}] torch 64 0 {CanPlaceOn:["log",grass,dirt,sand,sandstone]}`)
-    bot.chat(`/gamemode 1 @p[name=${chatuser}]`) // set player to Survival mode
+    bot.chat(`/gamemode 2 @p[name=${chatuser}]`) // set player to Adventure mode
 }
 
 
