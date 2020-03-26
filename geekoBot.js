@@ -17,7 +17,8 @@ const phrases = ["Good luck!",
     "Watch out for those creepers!",
     "Bone meal can be used on saplings for a chance to grow faster.",
     "You can craft bonemeal from bones.",
-    "You can get bones by defeating skeletons."]
+    "You can get bones by defeating skeletons.",
+    "Try planting saplings in a 2x2 patter."]
 
 var bot = mineflayer.createBot({
     username,
@@ -36,6 +37,7 @@ bot.on('login',() => {
     console.log(`${username}| Login: Teleporting to geeko spawn`)
     bot.chat(`/gamemode 1`)
     bot.chat(`/tp ${spawn[0]} ${spawn[1]} ${spawn[2]}`)
+    bot.chat('/dmap mapset world:surface mapzoom:4')
 })
 
 // at set interval, chat random Geeko phrase
